@@ -10,9 +10,7 @@ export default defineConfig({
 
   plugins: [reactRefresh()],
   server: {
-    hmr: {
-      clientPort: process.env.VITE_CLIENT_PORT || null
-    },
+    host: "0.0.0.0",
     proxy: {
       '^/api': {
         target: 'http://api',

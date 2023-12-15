@@ -27,3 +27,18 @@ tilt up
 
 ## Need Help?
 Join us on the Kubernetes Slack in `#tilt`!
+
+## How to build docker image
+* API
+```sh
+cd <dir>/tilt-avatars/deploy
+docker build -t <image_name>:<ver> -f api.dockerfile <dir>/tilt-avatars/
+```
+ex. docker build -t samtest/avatars_api:1.0 -f api.dockerfile /mnt/d/Vortex/WSL/tilt-avatars/
+
+* web
+```sh
+cd <dir>/tilt-avatars/deploy
+docker build -t <image_name>:<ver> -f api.dockerfile <dir>/tilt-avatars/
+```
+ex. docker build -t samtest/avatars_web:1.0 -f web.dockerfile /mnt/d/Vortex/WSL/tilt-avatars/

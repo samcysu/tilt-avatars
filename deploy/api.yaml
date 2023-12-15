@@ -2,21 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
+  namespace: demo-app
   labels:
-    app: tilt-avatar-api
+    app: avatar-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tilt-avatar-api
+      app: avatar-api
   template:
     metadata:
       labels:
-        app: tilt-avatar-api
+        app: avatar-api
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: demo-app
+                operator: In
+                values:
+                - "true"
       containers:
-        - name: tilt-avatar-api
-          image: tilt-avatar-api
+        - name: avatar-api
+          image: 073903779593.dkr.ecr.ap-northeast-1.amazonaws.com/demo/avatars_api:latest
           ports:
             - containerPort: 5000
           readinessProbe:
@@ -27,10 +37,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api
+  name: avatar-api
+  namespace: demo-app
 spec:
   selector:
-    app: tilt-avatar-api
+    app: avatar-api
   ports:
     - protocol: TCP
       port: 80
