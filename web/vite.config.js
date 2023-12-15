@@ -13,7 +13,8 @@ export default defineConfig({
     host: "0.0.0.0",
     proxy: {
       '^/api': {
-        target: 'http://api',
+        // host name must sync to avatar-api service name
+        target: 'http://avatar-api',
         changeOrigin: true
       }
     }

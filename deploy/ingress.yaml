@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: demo-app
+  namespace: ${DEMO_APP_NAMESPACE}
   name: demo-app-ingress
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing

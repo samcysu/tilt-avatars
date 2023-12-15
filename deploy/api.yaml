@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: demo-app
+  namespace: ${DEMO_APP_NAMESPACE}
   labels:
     app: avatar-api
 spec:
@@ -26,7 +26,8 @@ spec:
                 - "true"
       containers:
         - name: avatar-api
-          image: 073903779593.dkr.ecr.ap-northeast-1.amazonaws.com/demo/avatars_api:latest
+          image: ${API_IMG_URI}:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           readinessProbe:
@@ -38,7 +39,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: avatar-api
-  namespace: demo-app
+  namespace: ${DEMO_APP_NAMESPACE}
 spec:
   selector:
     app: avatar-api
